@@ -13,7 +13,8 @@
   ],
   "files.associations": {
     "*.csproj": "xml",
-    "*.sln.dotsettings": "xml"
+    "*.sln.dotsettings": "xml",
+    "task-runner.json": "jsonc"
   },
 
   "dotnet.defaultSolution": "DotnetBump.sln",
