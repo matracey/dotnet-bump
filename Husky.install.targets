@@ -1,0 +1,31 @@
+<Project>
+  <Target Name="FindRepositoryRoot" BeforeTargets="Restore;CollectPackageReferences">
+    <Exec Command="git rev-parse --show-toplevel" ConsoleToMSBuild="true" StandardOutputImportance="Low" StandardErrorImportance="Low" IgnoreExitCode="true" ContinueOnError="true">
+      <Output TaskParameter="ExitCode" PropertyName="ShowToplevelExitCode" />
+      <Output TaskParameter="ConsoleOutput" PropertyName="RepositoryRoot" Condition="'$(ShowToplevelExitCode)' == 0" />
+    </Exec>
+  </Target>
+
+  <Target Name="WarnIfRepositoryRootNotSet" AfterTargets="FindRepositoryRoot" DependsOnTargets="FindRepositoryRoot" Condition="'$(HUSKY)' != 0 and '$(RepositoryRoot)' == ''">
+    <Warning Text="Unable to determine the repository root directory. Please install Husky manually by running 'dotnet husky install' in the repository root." ContinueOnError="true" />
+  </Target>
+
+  <Target Name="CheckIfHuskyNeedsToBeInstalled" BeforeTargets="Restore;CollectPackageReferences" DependsOnTargets="FindRepositoryRoot" Condition="'$(RepositoryRoot)' != ''">
+    <PropertyGroup>
+      <HuskyDir>$([System.IO.Path]::Combine($(RepositoryRoot), '.husky', '_'))</HuskyDir>
+      <ShouldInstallHusky Condition="!Exists('$(HuskyDir)')">true</ShouldInstallHusky>
+    </PropertyGroup>
+  </Target>
+
+  <Target Name="WarnIfHuskyDirDoesNotExist" AfterTargets="CheckIfHuskyNeedsToBeInstalled" DependsOnTargets="CheckIfHuskyNeedsToBeInstalled" Condition="'$(HUSKY)' == 0 and '$(ShouldInstallHusky)' == 'true'">
+    <Message Text="The HUSKY environment variable is set to '0'. Skipping Husky installation..." Importance="High" />
+  </Target>
+
+  <Target Name="Husky" BeforeTargets="Restore;CollectPackageReferences" DependsOnTargets="FindRepositoryRoot;RestoreDotnetTools" Condition="'$(HUSKY)' != 0 and '$(ShouldInstallHusky)' == 'true'">
+    <Exec Command="dotnet husky install" StandardOutputImportance="Low" StandardErrorImportance="Low" WorkingDirectory="$(RepositoryRoot)" IgnoreExitCode="true" ContinueOnError="true">
+      <Output TaskParameter="ExitCode" PropertyName="HuskyInstallExitCode" />
+    </Exec>
+    <Warning Text="Husky installation failed. Please install Husky manually by running 'dotnet husky install' in the repository root." Condition="'$(HuskyInstallExitCode)' != 0" ContinueOnError="true" />
+    <Message Text="Husky installed successfully!" Importance="High" Condition="'$(HuskyInstallExitCode)' == 0" />
+  </Target>
+</Project>
