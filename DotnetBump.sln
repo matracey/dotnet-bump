@@ -1,0 +1,33 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{502CC3CE-F5FB-4FC8-B3F6-A5A0D7261703}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		CHANGELOG.md = CHANGELOG.md
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{4D60ED1D-627B-45A5-B5DE-8CC201B4F167}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{E0615955-2FB3-4CA5-B421-402A10201187}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\release.yaml = .github\workflows\release.yaml
+		.github\workflows\test.yaml = .github\workflows\test.yaml
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E0615955-2FB3-4CA5-B421-402A10201187} = {4D60ED1D-627B-45A5-B5DE-8CC201B4F167}
+	EndGlobalSection
+EndGlobal

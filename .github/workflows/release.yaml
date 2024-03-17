@@ -2,7 +2,7 @@ name: Release
 on:
   push:
     tags:
-      - '**'
+      - "**"
 jobs:
   release:
     name: Release
@@ -10,23 +10,5 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Use node 16
-        uses: actions/setup-node@v1
-        with:
-          node-version: 16
-      - name: Install
-        run: npm i
-      - name: Pack
-        run: npm run pack
-      - name: Zip
-        run: |
-          zip --junk-paths dist/windows-x64.zip dist/windows-x64/*
-          zip --junk-paths dist/linux-x64.zip dist/linux-x64/*
-          zip --junk-paths dist/macos-x64.zip dist/macos-x64/*
-      - name: Create GitHub release
-        uses: docker://antonyurchenko/git-release:v4
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          args: |
-            dist/*.zip
+      - name: Hello world
+        run: echo "Hello world"
