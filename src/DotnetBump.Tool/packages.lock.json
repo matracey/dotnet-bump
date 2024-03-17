@@ -2,6 +2,12 @@
   "version": 1,
   "dependencies": {
     "net6.0": {
+      "CSharpGuidelinesAnalyzer": {
+        "type": "Direct",
+        "requested": "[3.8.4, )",
+        "resolved": "3.8.4",
+        "contentHash": "yfpcYXiPeyTRcifpYsk8Ez7GqhzBHF+cFxfo8fjH4jctQqr+shTfpOeE+4kj6+SNvJBZsBzYJ/3pi5aj+1q9Wg=="
+      },
       "McMaster.Extensions.CommandLineUtils": {
         "type": "Direct",
         "requested": "[2.2.5, )",

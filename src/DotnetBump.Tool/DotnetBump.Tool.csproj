@@ -24,6 +24,10 @@
     <EmbedAllSources>True</EmbedAllSources>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="CSharpGuidelinesAnalyzer" Version="3.8.4">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
     <PackageReference Include="McMaster.Extensions.CommandLineUtils" Version="2.2.5" />
   </ItemGroup>
 </Project>
